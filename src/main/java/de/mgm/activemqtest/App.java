@@ -2,6 +2,12 @@ package de.mgm.activemqtest;
 
 import javax.jms.JMSException;
 
+/**
+ * Just the mainclass to run
+ * 
+ * @author cbelka
+ *
+ */
 public class App {
 
 	/**
