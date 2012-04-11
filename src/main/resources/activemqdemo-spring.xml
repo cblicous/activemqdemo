@@ -29,8 +29,8 @@
       p:connectionFactory-ref="connectionFactory"
       p:destinationName="TEST.FOO"
       p:messageListener-ref="simpleMessageListener"
-      p:concurrentConsumers="10"
-      p:maxConcurrentConsumers="50"
+      p:concurrentConsumers="2"
+      p:maxConcurrentConsumers="4"
       p:receiveTimeout="5000"
       p:idleTaskExecutionLimit="10"
       p:idleConsumerLimit="5" />

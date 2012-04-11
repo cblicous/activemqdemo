@@ -20,7 +20,7 @@ public class SimpleProducer
     private MessageProducer producer;
  
     private static final String  QUEUENAME = "TEST.FOO";
-    
+    private static final int MESSAGECOUNT = 10;
     public SimpleProducer() throws JMSException
     {
     	ApplicationContext context=new ClassPathXmlApplicationContext(new String[]{"activemqdemo-spring.xml"});
@@ -34,7 +34,7 @@ public class SimpleProducer
  
     public void createMessages() throws JMSException
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < MESSAGECOUNT; i++)
         {
             System.out.println("Creating Message " + i);
             Message message = session.createTextMessage("Hello World!");
