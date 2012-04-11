@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+   http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.1.xsd">
+
+	<!-- A JMS connection factory for ActiveMQ -->
+
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"
+		p:brokerURL="tcp://localhost:61616" />
+
+
+
+	<!-- A POJO that implements the JMS message listener -->
+
+	<bean id="simpleMessageListener" class="de.mgm.activemqtest.SimpleMessageListener" init-method="init" />
+		<!-- A JMS namespace aware Spring configuration for the message listener 
+			container -->
+
+		<!--   <jms:listener-container container-type="default"
+			connection-factory="connectionFactory" acknowledge="auto" concurrency="10-50">
+			<jms:listener destination="TEST.FOO" ref="simpleMessageListener"
+				method="onMessage" />
+		</jms:listener-container> !-->
+
+<bean id="msgListenerContainer"
+      class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+      p:connectionFactory-ref="connectionFactory"
+      p:destinationName="TEST.FOO"
+      p:messageListener-ref="simpleMessageListener"
+      p:concurrentConsumers="10"
+      p:maxConcurrentConsumers="50"
+      p:receiveTimeout="5000"
+      p:idleTaskExecutionLimit="10"
+      p:idleConsumerLimit="5" />
+
+
+</beans>
